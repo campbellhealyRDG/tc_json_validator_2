@@ -16,24 +16,27 @@ from pydantic import BaseModel, ValidationError, Field, SecretStr, root_validato
 from typing import Optional, Dict, Any, Union
 from watchdog.observers.polling import PollingObserver  # More compatible observer
 from watchdog.events import FileSystemEventHandler
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Import configuration variables
+from config import (
+    DEBUG, DATA_FOLDER, VALIDATED_FOLDER, RETURNS_FOLDER, LOGS_FOLDER, PROCESSING_FOLDER,
+    APP_LOG_PATH, ERROR_LOG_PATH, DEBUG_LOG_PATH, SENDER_EMAIL, RECEIVER_EMAIL,
+    EMAIL_PASSWORD, SMTP_SERVER, SMTP_PORT, MAX_FILE_ACCESS_ATTEMPTS, FILE_ACCESS_DELAY,
+    FILE_MOVE_MAX_ATTEMPTS, FILE_MOVE_RETRY_DELAY, THIRD_PARTY_MAX_RETRIES,
+    THIRD_PARTY_BACKOFF_BASE, MIN_PYTHON_VERSION, MIN_FREE_DISK_SPACE_MB,
+    REQUIRED_ENV_VARS
+)
 
+# Update variable names to match our imports
+data_folder = DATA_FOLDER
+validated_folder = VALIDATED_FOLDER
+returns_folder = RETURNS_FOLDER
+logs_folder = LOGS_FOLDER
+processing_folder = PROCESSING_FOLDER
 
-# Turn Debugging Off (False) or On (True)
-DEBUG = False  # Set to True to enable debugging
-logging.basicConfig(level=logging.DEBUG if DEBUG else logging.INFO, force = True)
+logging.basicConfig(level=logging.DEBUG if DEBUG else logging.INFO, force=True)
 logging.debug("Script has started running...")
 logging.info("Script is running...")
-
-# Define folder paths
-data_folder = "data"
-validated_folder = "validated"
-returns_folder = "returns"
-logs_folder = "logs"
-processing_folder = "processing"  # Temporary folder for files being processed
 
 # Ensure output directories exist
 for folder in [validated_folder, returns_folder, logs_folder, processing_folder]:
@@ -42,11 +45,6 @@ for folder in [validated_folder, returns_folder, logs_folder, processing_folder]
     except Exception as e:
         print(f"CRITICAL: Cannot create {folder} directory: {str(e)}")
         sys.exit(1)
-
-# Set up log file paths
-app_log_path = os.path.join(logs_folder, 'app.log')
-error_log_path = os.path.join(logs_folder, 'error.log')
-debug_log_path = os.path.join(logs_folder, 'debug.log')
 
 # Enhanced log formatter with filename and line numbers
 detailed_formatter = logging.Formatter(
@@ -64,7 +62,7 @@ app_logger.setLevel(logging.INFO)
 
 # Rotating file handler for app logs - 5MB max size, keep 5 backup files
 app_handler = RotatingFileHandler(
-    app_log_path, maxBytes=5*1024*1024, backupCount=5
+    APP_LOG_PATH, maxBytes=5*1024*1024, backupCount=5
 )
 app_handler.setFormatter(simple_formatter)
 app_handler.setLevel(logging.INFO)
@@ -75,7 +73,7 @@ error_logger = logging.getLogger('error')
 error_logger.setLevel(logging.ERROR)
 # Rotating file handler for error logs - 2MB max size, keep 10 backup files
 error_handler = RotatingFileHandler(
-    error_log_path, maxBytes=2*1024*1024, backupCount=10
+    ERROR_LOG_PATH, maxBytes=2*1024*1024, backupCount=10
 )
 error_handler.setFormatter(detailed_formatter)
 error_handler.setLevel(logging.ERROR)
@@ -86,7 +84,7 @@ debug_logger = logging.getLogger('debug')
 debug_logger.setLevel(logging.DEBUG if DEBUG else logging.INFO)
 # Rotating file handler for debug logs - 10MB max size, keep 3 backup files
 debug_handler = RotatingFileHandler(
-    debug_log_path, maxBytes=10*1024*1024, backupCount=3
+    DEBUG_LOG_PATH, maxBytes=10*1024*1024, backupCount=3
 )
 debug_handler.setFormatter(detailed_formatter)
 debug_handler.setLevel(logging.DEBUG if DEBUG else logging.INFO)
@@ -164,7 +162,7 @@ class JSONFileHandler(FileSystemEventHandler):
         
         try:
             # Wait for file to be completely written and check access
-            success = self.wait_for_file_access(file_path, max_attempts=10)
+            success = self.wait_for_file_access(file_path, max_attempts=MAX_FILE_ACCESS_ATTEMPTS)
             if not success:
                 error_logger.error(f"Cannot access file after multiple attempts: {file_path}")
                 self.processing_files.discard(file_path)
@@ -265,7 +263,7 @@ class JSONFileHandler(FileSystemEventHandler):
                 
         return sanitized
     
-    def wait_for_file_access(self, file_path, max_attempts=5, delay=1):
+    def wait_for_file_access(self, file_path, max_attempts=MAX_FILE_ACCESS_ATTEMPTS, delay=FILE_ACCESS_DELAY):
         """Wait for a file to be accessible with multiple retries."""
         for attempt in range(max_attempts):
             if not os.path.exists(file_path):
@@ -288,7 +286,7 @@ class JSONFileHandler(FileSystemEventHandler):
     def move_file(self, source_path, dest_folder, filename):
         """Safely move a file to destination folder with retries."""
         dest_path = os.path.join(dest_folder, filename)
-        max_attempts = 3
+        max_attempts = FILE_MOVE_MAX_ATTEMPTS
         
         for attempt in range(max_attempts):
             try:
@@ -303,7 +301,7 @@ class JSONFileHandler(FileSystemEventHandler):
                 return True
             except (PermissionError, OSError) as e:
                 error_logger.error(f"Failed to move file on attempt {attempt+1}: {str(e)}")
-                time.sleep(1)
+                time.sleep(FILE_MOVE_RETRY_DELAY)
         
         error_logger.error(f"Failed to move file after {max_attempts} attempts: {source_path}")
         return False
@@ -325,7 +323,7 @@ class JSONFileHandler(FileSystemEventHandler):
         # Add actual code to send the file to the 3rd party (e.g., via HTTP API or FTP)
         
         # Retry mechanism for external API calls would be added here
-        max_retries = 3
+        max_retries = THIRD_PARTY_MAX_RETRIES
         for attempt in range(max_retries):
             try:
                 # Simulate API call
@@ -335,7 +333,7 @@ class JSONFileHandler(FileSystemEventHandler):
                 return True
             except Exception as e:
                 error_logger.error(f"Failed to send to third party (attempt {attempt+1}): {str(e)}")
-                time.sleep(2 ** attempt)  # Exponential backoff
+                time.sleep(THIRD_PARTY_BACKOFF_BASE ** attempt)  # Exponential backoff
                 
         error_logger.error(f"Failed to send file to third party after {max_retries} attempts")
         return False
@@ -349,21 +347,14 @@ class JSONFileHandler(FileSystemEventHandler):
         subject = f"File Validation Error: {file_name}"
         body = f"The file {file_name} failed validation.\n\nError: {error_message}\n\nTimestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}"
         
-        # Email setup from environment variables
-        sender_email = os.environ.get("EMAIL_SENDER", "noreply@example.com")
-        receiver_email = os.environ.get("EMAIL_RECEIVER", "admin@example.com")
-        password = os.environ.get("EMAIL_PASSWORD", "")  # Get from environment variable
-        smtp_server = os.environ.get("SMTP_SERVER", "smtp.office365.com")
-        smtp_port = int(os.environ.get("SMTP_PORT", "587"))  # Use 587 for Office 365
-        
-        if not password:
+        if not EMAIL_PASSWORD:
             error_logger.error("Email password not set in environment variables")
             return
             
         # Create the email
         msg = MIMEMultipart()
-        msg['From'] = sender_email
-        msg['To'] = receiver_email
+        msg['From'] = SENDER_EMAIL
+        msg['To'] = RECEIVER_EMAIL
         msg['Subject'] = subject
         msg.attach(MIMEText(body, 'plain'))
         
@@ -372,14 +363,14 @@ class JSONFileHandler(FileSystemEventHandler):
             context = ssl.create_default_context()
             
             # Connect to SMTP server and then upgrade with STARTTLS
-            with smtplib.SMTP(smtp_server, smtp_port) as server:
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
                 server.ehlo()  # Can be omitted
                 server.starttls(context=context)  # Secure the connection
                 server.ehlo()  # Can be omitted
-                server.login(sender_email, password)
+                server.login(SENDER_EMAIL, EMAIL_PASSWORD)
                 text = msg.as_string()
-                server.sendmail(sender_email, receiver_email, text)
-                app_logger.info(f"Error email sent to {receiver_email}")
+                server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, text)
+                app_logger.info(f"Error email sent to {RECEIVER_EMAIL}")
         except Exception as e:
             stack_trace = traceback.format_exc()
             error_logger.error(f"Failed to send email: {str(e)}\n{stack_trace}")
@@ -398,15 +389,15 @@ def check_system_requirements():
     """Check if system meets requirements to run the application."""
     try:
         # Check Python version
-        if sys.version_info < (3, 7):
-            error_logger.critical("Python 3.7 or higher is required")
+        if sys.version_info < MIN_PYTHON_VERSION:
+            error_logger.critical(f"Python {MIN_PYTHON_VERSION[0]}.{MIN_PYTHON_VERSION[1]} or higher is required")
             return False
         
         # Check disk space
         if os.name == 'posix':  # Linux/Unix/MacOS
             import shutil
             total, used, free = shutil.disk_usage("/")
-            if free < 100 * 1024 * 1024:  # Less than 100 MB free
+            if free < MIN_FREE_DISK_SPACE_MB * 1024 * 1024:  # Less than minimum MB free
                 error_logger.critical(f"Low disk space: {free / (1024 * 1024):.2f} MB free")
                 return False
         
@@ -417,8 +408,7 @@ def check_system_requirements():
                 return False
         
         # Check that required environment variables are set
-        required_env_vars = ["EMAIL_PASSWORD"]
-        missing_vars = [var for var in required_env_vars if not os.environ.get(var)]
+        missing_vars = [var for var in REQUIRED_ENV_VARS if not os.environ.get(var)]
         if missing_vars:
             error_logger.critical(f"Missing required environment variables: {', '.join(missing_vars)}")
             error_logger.info("Please create a .env file with the required variables or set them in your environment")
