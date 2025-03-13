@@ -135,3 +135,23 @@
 2025-03-13 14:30:31,875 - INFO - Received signal 2, shutting down gracefully...
 2025-03-13 14:30:32,839 - INFO - Observer stopped successfully
 2025-03-13 14:30:32,840 - INFO - Application shutdown complete
+2025-03-13 14:56:25,567 - INFO - Starting Customer JSON Processor
+2025-03-13 14:56:25,569 - INFO - Watching folder: data
+2025-03-13 14:57:13,924 - INFO - Validated nested JSON: c8d12b9e_test_nested.json
+2025-03-13 14:57:13,926 - INFO - Sending c8d12b9e_test_nested.json to 3rd party
+2025-03-13 14:57:33,101 - WARNING - Invalid file 70085311_test_nestedCustomerID.json: Invalid JSON structure: [{'type': 'value_error', 'loc': (), 'msg': 'Value error, JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields', 'input': {'OperatorID': {'CustomerID': 'CU', 'CustomerCardNumber': '1234567812345678'}}, 'ctx': {'error': ValueError('JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields')}, 'url': 'https://errors.pydantic.dev/2.10/v/value_error'}]
+2025-03-13 14:57:33,102 - INFO - Sending error email about 70085311_test_nestedCustomerID.json
+2025-03-13 14:59:17,050 - INFO - Validated nested JSON: 96ca0a07_test_nested copy.json
+2025-03-13 14:59:17,051 - INFO - Sending 96ca0a07_test_nested copy.json to 3rd party
+2025-03-13 14:59:54,348 - WARNING - Invalid file a46a7086_test_nested fault copy.json: Invalid JSON structure: [{'type': 'too_short', 'loc': ('Customer', 'CustomerCardNumber'), 'msg': 'Value should have at least 16 items after validation, not 14', 'input': '12345678901234', 'ctx': {'field_type': 'Value', 'min_length': 16, 'actual_length': 14}, 'url': 'https://errors.pydantic.dev/2.10/v/too_short'}]
+2025-03-13 14:59:54,349 - INFO - Sending error email about a46a7086_test_nested fault copy.json
+2025-03-13 15:00:33,218 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 15:00:33,692 - INFO - Observer stopped successfully
+2025-03-13 15:00:33,693 - INFO - Application shutdown complete
+2025-03-13 15:03:06,754 - INFO - Starting Customer JSON Processor
+2025-03-13 15:03:06,756 - INFO - Watching folder: data
+2025-03-13 15:03:15,852 - INFO - Validated nested JSON: e1565f5e_test_nested copy.json
+2025-03-13 15:03:15,852 - INFO - Sending e1565f5e_test_nested copy.json to 3rd party
+2025-03-13 15:03:59,074 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 15:03:59,782 - INFO - Observer stopped successfully
+2025-03-13 15:03:59,783 - INFO - Application shutdown complete

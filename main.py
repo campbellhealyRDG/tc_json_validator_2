@@ -27,6 +27,9 @@ from config import (
     REQUIRED_ENV_VARS
 )
 
+from models import CustomerData, JSONSchema
+
+
 # Update variable names to match our imports
 data_folder = DATA_FOLDER
 validated_folder = VALIDATED_FOLDER
@@ -97,42 +100,6 @@ console_handler.setLevel(logging.INFO)
 root_logger.addHandler(console_handler)
 
 # Models for nested JSON structure
-class CustomerData(BaseModel):
-    CustomerID: str = Field(..., min_length=7)
-    # Use SecretStr for sensitive data - adds a layer of protection for card numbers
-    CustomerCardNumber: SecretStr = Field(..., min_length=16, max_length=16)
-    # Optional nested fields
-    CustomerDetails: Optional[Dict[str, Any]] = None
-
-class JSONSchema(BaseModel):
-    OperatorID: str = Field(..., min_length=5, pattern=r"^[a-zA-Z0-9]+$")
-    # Either direct CustomerID and CustomerCardNumber fields (flat structure)
-    # or a nested Customer object (nested structure)
-    CustomerID: Optional[str] = Field(None, min_length=7)
-    CustomerCardNumber: Optional[SecretStr] = Field(None, min_length=16, max_length=16)
-    # For nested structure
-    Customer: Optional[CustomerData] = None
-    # Allow additional nested data
-    Metadata: Optional[Dict[str, Any]] = None
-    
-    @root_validator(pre=True)
-    def check_structure(cls, values):
-        """Validator to ensure either flat or proper nested structure exists."""
-        # Check if we have a nested Customer object
-        has_nested = 'Customer' in values and values['Customer'] is not None
-        
-        # Check if we have direct customer fields
-        has_direct_id = 'CustomerID' in values and values['CustomerID'] is not None
-        has_direct_card = 'CustomerCardNumber' in values and values['CustomerCardNumber'] is not None
-        
-        # Either we need both direct fields, or a nested Customer object
-        if not ((has_direct_id and has_direct_card) or has_nested):
-            raise ValueError(
-                "JSON must either have CustomerID and CustomerCardNumber fields directly, "
-                "or a nested Customer object with these fields"
-            )
-        
-        return values
 
 class JSONFileHandler(FileSystemEventHandler):
     def __init__(self):
