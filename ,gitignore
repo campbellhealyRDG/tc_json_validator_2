@@ -1,0 +1,6 @@
+.venv/
+Archive/
+logs/
+processing/
+tests/
+.env

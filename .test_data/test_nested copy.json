@@ -1,0 +1,15 @@
+{
+  "OperatorID": "OP123",
+  "Customer": {
+    "CustomerID": "CUST0001234",
+    "CustomerCardNumber": "1234567890123456",
+    "CustomerDetails": {
+      "Name": "John Doe",
+      "Email": "john@example.com"
+    }
+  },
+  "Metadata": {
+    "Source": "Web",
+    "Timestamp": "2025-03-13T10:15:30Z"
+  }
+}

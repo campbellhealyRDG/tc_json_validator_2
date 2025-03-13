@@ -1,0 +1,165 @@
+2025-03-12 14:07:40,719 - DEBUG - [customer_json_processor.py:214] - <module> - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-12 14:07:40,721 - DEBUG - [customer_json_processor.py:236] - <module> - Observer started successfully
+2025-03-12 14:07:51,467 - DEBUG - [customer_json_processor.py:93] - process_file - New file detected: data\test_flat.json
+2025-03-12 14:07:52,469 - DEBUG - [customer_json_processor.py:107] - process_file - Reading file content: data\test_flat.json
+2025-03-12 14:07:52,470 - DEBUG - [customer_json_processor.py:162] - validate_json - Validating JSON data: {'OperatorID': 'OP123', 'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}
+2025-03-12 14:07:52,481 - DEBUG - [customer_json_processor.py:146] - move_to_validated - File moved to validated\3f86d934_test_flat.json
+2025-03-12 14:07:52,482 - DEBUG - [customer_json_processor.py:172] - send_to_third_party - Full path for 3rd party transmission: validated\3f86d934_test_flat.json
+2025-03-12 14:08:40,809 - DEBUG - [customer_json_processor_v2_robust_additions.py:342] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-12 14:08:40,811 - DEBUG - [customer_json_processor_v2_robust_additions.py:380] - run_file_processor - Observer started successfully
+2025-03-12 14:08:56,957 - DEBUG - [customer_json_processor_v2_robust_additions.py:112] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-12 14:08:56,963 - DEBUG - [customer_json_processor_v2_robust_additions.py:129] - process_file - Copied file to processing folder: processing\3c0f47a0_test_flat.json
+2025-03-12 14:08:56,964 - DEBUG - [customer_json_processor_v2_robust_additions.py:134] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-12 14:08:56,964 - DEBUG - [customer_json_processor_v2_robust_additions.py:145] - process_file - Reading file content: processing\3c0f47a0_test_flat.json
+2025-03-12 14:08:56,965 - DEBUG - [customer_json_processor_v2_robust_additions.py:226] - validate_json - Validating JSON data: {'OperatorID': 'OP123', 'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}
+2025-03-12 14:08:56,968 - DEBUG - [customer_json_processor_v2_robust_additions.py:215] - move_file - Successfully moved file to validated\3c0f47a0_test_flat.json
+2025-03-12 14:08:56,970 - DEBUG - [customer_json_processor_v2_robust_additions.py:236] - send_to_third_party - Full path for 3rd party transmission: validated\3c0f47a0_test_flat.json
+2025-03-12 14:08:57,071 - DEBUG - [customer_json_processor_v2_robust_additions.py:246] - send_to_third_party - Successfully sent file to third party
+2025-03-12 14:08:57,074 - DEBUG - [customer_json_processor_v2_robust_additions.py:177] - process_file - Cleaned up processing file: processing\3c0f47a0_test_flat.json
+2025-03-12 14:10:24,572 - DEBUG - [customer_json_processor_v2_robust_additions.py:112] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat_CustomerID.json
+2025-03-12 14:10:24,576 - DEBUG - [customer_json_processor_v2_robust_additions.py:129] - process_file - Copied file to processing folder: processing\c4fc9f72_test_flat_CustomerID.json
+2025-03-12 14:10:24,577 - DEBUG - [customer_json_processor_v2_robust_additions.py:134] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat_CustomerID.json
+2025-03-12 14:10:24,578 - DEBUG - [customer_json_processor_v2_robust_additions.py:145] - process_file - Reading file content: processing\c4fc9f72_test_flat_CustomerID.json
+2025-03-12 14:10:24,579 - DEBUG - [customer_json_processor_v2_robust_additions.py:226] - validate_json - Validating JSON data: {'OperatorID': 'OP123', 'CustomerID': 'CU', 'CustomerCardNumber': '1234567812345678'}
+2025-03-12 14:10:24,583 - DEBUG - [customer_json_processor_v2_robust_additions.py:215] - move_file - Successfully moved file to returns\c4fc9f72_test_flat_CustomerID.json
+2025-03-12 14:10:24,585 - DEBUG - [customer_json_processor_v2_robust_additions.py:258] - send_error_email - Email error details: Invalid JSON structure: [{'type': 'string_too_short', 'loc': ('CustomerID',), 'msg': 'String should have at least 7 characters', 'input': 'CU', 'ctx': {'min_length': 7}, 'url': 'https://errors.pydantic.dev/2.10/v/string_too_short'}]
+2025-03-12 14:10:24,586 - DEBUG - [customer_json_processor_v2_robust_additions.py:177] - process_file - Cleaned up processing file: processing\c4fc9f72_test_flat_CustomerID.json
+2025-03-13 09:21:15,810 - DEBUG - [customer_json_processor_v3_security_enhancements.py:374] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 09:21:15,813 - DEBUG - [customer_json_processor_v3_security_enhancements.py:412] - run_file_processor - Observer started successfully
+2025-03-13 09:21:33,941 - DEBUG - [customer_json_processor_v3_security_enhancements.py:122] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-13 09:21:33,946 - DEBUG - [customer_json_processor_v3_security_enhancements.py:139] - process_file - Copied file to processing folder: processing\9d9f07e6_test_flat.json
+2025-03-13 09:21:33,950 - DEBUG - [customer_json_processor_v3_security_enhancements.py:144] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-13 09:21:33,951 - DEBUG - [customer_json_processor_v3_security_enhancements.py:155] - process_file - Reading file content: processing\9d9f07e6_test_flat.json
+2025-03-13 09:21:33,953 - DEBUG - [customer_json_processor_v3_security_enhancements.py:236] - validate_json - Validating JSON data: {'OperatorID': 'OP123', 'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}
+2025-03-13 09:21:33,953 - DEBUG - [customer_json_processor_v3_security_enhancements.py:247] - validate_json - Validating JSON data: {'OperatorID': 'OP123', 'CustomerID': 'CUST456', 'CustomerCardNumber': '************5678'}
+2025-03-13 09:21:33,959 - DEBUG - [customer_json_processor_v3_security_enhancements.py:225] - move_file - Successfully moved file to validated\9d9f07e6_test_flat.json
+2025-03-13 09:21:33,965 - DEBUG - [customer_json_processor_v3_security_enhancements.py:257] - send_to_third_party - Full path for 3rd party transmission: validated\9d9f07e6_test_flat.json
+2025-03-13 09:21:34,066 - DEBUG - [customer_json_processor_v3_security_enhancements.py:267] - send_to_third_party - Successfully sent file to third party
+2025-03-13 09:21:34,067 - DEBUG - [customer_json_processor_v3_security_enhancements.py:187] - process_file - Cleaned up processing file: processing\9d9f07e6_test_flat.json
+2025-03-13 09:22:00,088 - DEBUG - [customer_json_processor_v3_security_enhancements.py:122] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:22:00,093 - DEBUG - [customer_json_processor_v3_security_enhancements.py:139] - process_file - Copied file to processing folder: processing\b9a381fb_test_nested.json
+2025-03-13 09:22:00,095 - DEBUG - [customer_json_processor_v3_security_enhancements.py:144] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:22:00,096 - DEBUG - [customer_json_processor_v3_security_enhancements.py:155] - process_file - Reading file content: processing\b9a381fb_test_nested.json
+2025-03-13 09:22:00,097 - DEBUG - [customer_json_processor_v3_security_enhancements.py:236] - validate_json - Validating JSON data: {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}
+2025-03-13 09:22:00,098 - DEBUG - [customer_json_processor_v3_security_enhancements.py:247] - validate_json - Validating JSON data: {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}
+2025-03-13 09:22:00,108 - DEBUG - [customer_json_processor_v3_security_enhancements.py:225] - move_file - Successfully moved file to returns\b9a381fb_test_nested.json
+2025-03-13 09:22:00,112 - DEBUG - [customer_json_processor_v3_security_enhancements.py:279] - send_error_email - Email error details: Invalid JSON structure: [{'type': 'string_type', 'loc': ('OperatorID',), 'msg': 'Input should be a valid string', 'input': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}, 'url': 'https://errors.pydantic.dev/2.10/v/string_type'}, {'type': 'missing', 'loc': ('CustomerID',), 'msg': 'Field required', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'url': 'https://errors.pydantic.dev/2.10/v/missing'}, {'type': 'missing', 'loc': ('CustomerCardNumber',), 'msg': 'Field required', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'url': 'https://errors.pydantic.dev/2.10/v/missing'}]
+2025-03-13 09:22:00,365 - DEBUG - [customer_json_processor_v3_security_enhancements.py:187] - process_file - Cleaned up processing file: processing\b9a381fb_test_nested.json
+2025-03-13 09:27:09,347 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:437] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 09:27:09,348 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:475] - run_file_processor - Observer started successfully
+2025-03-13 09:27:15,404 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:155] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-13 09:27:15,407 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:172] - process_file - Copied file to processing folder: processing\01f768df_test_flat.json
+2025-03-13 09:27:15,408 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:177] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-13 09:27:15,408 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:188] - process_file - Reading file content: processing\01f768df_test_flat.json
+2025-03-13 09:27:15,409 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:201] - process_file - Detected flat JSON structure in 01f768df_test_flat.json
+2025-03-13 09:27:15,409 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:205] - process_file - Processing data: {'OperatorID': 'OP123', 'CustomerID': 'CUST456', 'CustomerCardNumber': '************5678'}
+2025-03-13 09:27:15,410 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:309] - validate_json - Validating JSON data structure
+2025-03-13 09:27:15,412 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:298] - move_file - Successfully moved file to validated\01f768df_test_flat.json
+2025-03-13 09:27:15,414 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:320] - send_to_third_party - Full path for 3rd party transmission: validated\01f768df_test_flat.json
+2025-03-13 09:27:15,514 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:330] - send_to_third_party - Successfully sent file to third party
+2025-03-13 09:27:15,515 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:229] - process_file - Cleaned up processing file: processing\01f768df_test_flat.json
+2025-03-13 09:27:41,687 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:155] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:27:41,689 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:172] - process_file - Copied file to processing folder: processing\933afe6c_test_nested.json
+2025-03-13 09:27:41,690 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:177] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:27:41,690 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:188] - process_file - Reading file content: processing\933afe6c_test_nested.json
+2025-03-13 09:27:41,691 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:201] - process_file - Detected flat JSON structure in 933afe6c_test_nested.json
+2025-03-13 09:27:41,691 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:205] - process_file - Processing data: {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '************5678'}}
+2025-03-13 09:27:41,692 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:309] - validate_json - Validating JSON data structure
+2025-03-13 09:27:41,693 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:298] - move_file - Successfully moved file to returns\933afe6c_test_nested.json
+2025-03-13 09:27:41,694 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:342] - send_error_email - Email error details: Invalid JSON structure: [{'type': 'value_error', 'loc': (), 'msg': 'Value error, JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'ctx': {'error': ValueError('JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields')}, 'url': 'https://errors.pydantic.dev/2.10/v/value_error'}]
+2025-03-13 09:27:41,873 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:229] - process_file - Cleaned up processing file: processing\933afe6c_test_nested.json
+2025-03-13 09:28:29,068 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:155] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested copy.json
+2025-03-13 09:28:29,072 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:172] - process_file - Copied file to processing folder: processing\ad4b3c48_test_nested copy.json
+2025-03-13 09:28:29,073 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:177] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested copy.json
+2025-03-13 09:28:29,074 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:188] - process_file - Reading file content: processing\ad4b3c48_test_nested copy.json
+2025-03-13 09:28:29,074 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:201] - process_file - Detected nested JSON structure in ad4b3c48_test_nested copy.json
+2025-03-13 09:28:29,075 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:205] - process_file - Processing data: {'OperatorID': 'OP123', 'Customer': {'CustomerID': 'CUST0001234', 'CustomerCardNumber': '************3456', 'CustomerDetails': {'Name': 'John Doe', 'Email': 'john@example.com'}}, 'Metadata': {'Source': 'Web', 'Timestamp': '2025-03-13T10:15:30Z'}}
+2025-03-13 09:28:29,075 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:309] - validate_json - Validating JSON data structure
+2025-03-13 09:28:29,080 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:298] - move_file - Successfully moved file to validated\ad4b3c48_test_nested copy.json
+2025-03-13 09:28:29,083 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:320] - send_to_third_party - Full path for 3rd party transmission: validated\ad4b3c48_test_nested copy.json
+2025-03-13 09:28:29,184 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:330] - send_to_third_party - Successfully sent file to third party
+2025-03-13 09:28:29,186 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:229] - process_file - Cleaned up processing file: processing\ad4b3c48_test_nested copy.json
+2025-03-13 09:29:13,370 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:155] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:29:13,374 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:172] - process_file - Copied file to processing folder: processing\341344b1_test_nested.json
+2025-03-13 09:29:13,376 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:177] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:29:13,377 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:188] - process_file - Reading file content: processing\341344b1_test_nested.json
+2025-03-13 09:29:13,378 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:201] - process_file - Detected flat JSON structure in 341344b1_test_nested.json
+2025-03-13 09:29:13,378 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:205] - process_file - Processing data: {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '************5678'}}
+2025-03-13 09:29:13,379 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:309] - validate_json - Validating JSON data structure
+2025-03-13 09:29:13,382 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:298] - move_file - Successfully moved file to returns\341344b1_test_nested.json
+2025-03-13 09:29:13,385 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:342] - send_error_email - Email error details: Invalid JSON structure: [{'type': 'value_error', 'loc': (), 'msg': 'Value error, JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'ctx': {'error': ValueError('JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields')}, 'url': 'https://errors.pydantic.dev/2.10/v/value_error'}]
+2025-03-13 09:29:13,608 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:229] - process_file - Cleaned up processing file: processing\341344b1_test_nested.json
+2025-03-13 09:44:14,679 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:442] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 09:44:14,681 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:480] - run_file_processor - Observer started successfully
+2025-03-13 09:44:47,744 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:442] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 09:44:47,746 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:480] - run_file_processor - Observer started successfully
+2025-03-13 09:45:02,943 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:442] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 09:45:02,946 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:480] - run_file_processor - Observer started successfully
+2025-03-13 09:46:20,591 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:157] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:46:20,594 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:174] - process_file - Copied file to processing folder: processing\fa3b6246_test_nested.json
+2025-03-13 09:46:20,595 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:179] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 09:46:20,596 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:190] - process_file - Reading file content: processing\fa3b6246_test_nested.json
+2025-03-13 09:46:20,596 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:203] - process_file - Detected flat JSON structure in fa3b6246_test_nested.json
+2025-03-13 09:46:20,596 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:207] - process_file - Processing data: {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '************5678'}}
+2025-03-13 09:46:20,597 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:311] - validate_json - Validating JSON data structure
+2025-03-13 09:46:20,598 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:300] - move_file - Successfully moved file to returns\fa3b6246_test_nested.json
+2025-03-13 09:46:20,602 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:297] - move_file - Destination exists, using alternative name: e2397bf9_fa3b6246_test_nested.json
+2025-03-13 09:46:20,604 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:300] - move_file - Successfully moved file to returns\e2397bf9_fa3b6246_test_nested.json
+2025-03-13 09:46:20,605 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:231] - process_file - Cleaned up processing file: processing\fa3b6246_test_nested.json
+2025-03-13 10:12:47,704 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:157] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-13 10:12:47,711 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:174] - process_file - Copied file to processing folder: processing\95bfc0bd_test_flat.json
+2025-03-13 10:12:47,713 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:179] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_flat.json
+2025-03-13 10:12:47,714 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:190] - process_file - Reading file content: processing\95bfc0bd_test_flat.json
+2025-03-13 10:12:47,715 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:203] - process_file - Detected flat JSON structure in 95bfc0bd_test_flat.json
+2025-03-13 10:12:47,715 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:207] - process_file - Processing data: {'OperatorID': 'OP123', 'CustomerID': 'CUST456', 'CustomerCardNumber': '************5678'}
+2025-03-13 10:12:47,717 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:311] - validate_json - Validating JSON data structure
+2025-03-13 10:12:47,721 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:300] - move_file - Successfully moved file to validated\95bfc0bd_test_flat.json
+2025-03-13 10:12:47,723 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:322] - send_to_third_party - Full path for 3rd party transmission: validated\95bfc0bd_test_flat.json
+2025-03-13 10:12:47,825 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:332] - send_to_third_party - Successfully sent file to third party
+2025-03-13 10:12:47,829 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:231] - process_file - Cleaned up processing file: processing\95bfc0bd_test_flat.json
+2025-03-13 10:16:34,443 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:157] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 10:16:34,445 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:174] - process_file - Copied file to processing folder: processing\6f939073_test_nested.json
+2025-03-13 10:16:34,446 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:179] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested.json
+2025-03-13 10:16:34,446 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:190] - process_file - Reading file content: processing\6f939073_test_nested.json
+2025-03-13 10:16:34,447 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:203] - process_file - Detected nested JSON structure in 6f939073_test_nested.json
+2025-03-13 10:16:34,447 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:207] - process_file - Processing data: {'OperatorID': 'OP123', 'Customer': {'CustomerID': 'CUST0001234', 'CustomerCardNumber': '************3456'}}
+2025-03-13 10:16:34,448 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:311] - validate_json - Validating JSON data structure
+2025-03-13 10:16:34,449 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:300] - move_file - Successfully moved file to validated\6f939073_test_nested.json
+2025-03-13 10:16:34,451 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:322] - send_to_third_party - Full path for 3rd party transmission: validated\6f939073_test_nested.json
+2025-03-13 10:16:34,551 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:332] - send_to_third_party - Successfully sent file to third party
+2025-03-13 10:16:34,552 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:231] - process_file - Cleaned up processing file: processing\6f939073_test_nested.json
+2025-03-13 10:17:39,911 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:157] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested fault.json
+2025-03-13 10:17:39,916 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:174] - process_file - Copied file to processing folder: processing\37202158_test_nested fault.json
+2025-03-13 10:17:39,917 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:179] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested fault.json
+2025-03-13 10:17:39,918 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:190] - process_file - Reading file content: processing\37202158_test_nested fault.json
+2025-03-13 10:17:39,919 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:203] - process_file - Detected nested JSON structure in 37202158_test_nested fault.json
+2025-03-13 10:17:39,920 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:207] - process_file - Processing data: {'OperatorID': 'OP123', 'Customer': {'CustomerID': 'CUST0001234', 'CustomerCardNumber': '**********1234'}}
+2025-03-13 10:17:39,920 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:311] - validate_json - Validating JSON data structure
+2025-03-13 10:17:39,923 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:300] - move_file - Successfully moved file to returns\37202158_test_nested fault.json
+2025-03-13 10:17:39,928 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:297] - move_file - Destination exists, using alternative name: b16941c6_37202158_test_nested fault.json
+2025-03-13 10:17:39,931 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:300] - move_file - Successfully moved file to returns\b16941c6_37202158_test_nested fault.json
+2025-03-13 10:17:39,932 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:231] - process_file - Cleaned up processing file: processing\37202158_test_nested fault.json
+2025-03-13 10:21:56,505 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:441] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:21:56,507 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:479] - run_file_processor - Observer started successfully
+2025-03-13 10:22:03,576 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:156] - process_file - New file detected: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested fault.json
+2025-03-13 10:22:03,582 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:173] - process_file - Copied file to processing folder: processing\53d2e30e_test_nested fault.json
+2025-03-13 10:22:03,584 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:178] - process_file - Removed original file: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\data\test_nested fault.json
+2025-03-13 10:22:03,585 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:189] - process_file - Reading file content: processing\53d2e30e_test_nested fault.json
+2025-03-13 10:22:03,586 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:202] - process_file - Detected nested JSON structure in 53d2e30e_test_nested fault.json
+2025-03-13 10:22:03,587 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:206] - process_file - Processing data: {'OperatorID': 'OP123', 'Customer': {'CustomerID': 'CUST0001234', 'CustomerCardNumber': '**********1234'}}
+2025-03-13 10:22:03,588 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:310] - validate_json - Validating JSON data structure
+2025-03-13 10:22:03,591 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:299] - move_file - Successfully moved file to returns\53d2e30e_test_nested fault.json
+2025-03-13 10:22:03,594 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:343] - send_error_email - Email error details: Invalid JSON structure: [{'type': 'too_short', 'loc': ('Customer', 'CustomerCardNumber'), 'msg': 'Value should have at least 16 items after validation, not 14', 'input': '12345678901234', 'ctx': {'field_type': 'Value', 'min_length': 16, 'actual_length': 14}, 'url': 'https://errors.pydantic.dev/2.10/v/too_short'}]
+2025-03-13 10:22:18,186 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:230] - process_file - Cleaned up processing file: processing\53d2e30e_test_nested fault.json
+2025-03-13 10:38:37,380 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:443] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:38:37,381 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:481] - run_file_processor - Observer started successfully
+2025-03-13 10:43:39,833 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:444] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:43:39,835 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:482] - run_file_processor - Observer started successfully
+2025-03-13 10:45:22,678 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:445] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:45:22,680 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:483] - run_file_processor - Observer started successfully
+2025-03-13 10:50:26,275 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:444] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:50:26,277 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:482] - run_file_processor - Observer started successfully
+2025-03-13 10:51:01,046 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:444] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:51:01,048 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:482] - run_file_processor - Observer started successfully
+2025-03-13 10:54:35,205 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:444] - run_file_processor - Working directory: C:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2
+2025-03-13 10:54:35,206 - DEBUG - [customer_json_processor_v4_nested_and_flat_json.py:482] - run_file_processor - Observer started successfully

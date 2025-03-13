@@ -1,0 +1,123 @@
+2025-03-12 09:46:59,487 - INFO - Watching folder: data
+2025-03-12 09:47:26,691 - WARNING - Invalid JSON structure (fbd7f4cd_test_flat_CustomerCardNumber.json): [{'type': 'string_too_long', 'loc': ('CustomerCardNumber',), 'msg': 'String should have at most 16 characters', 'input': '12345678123456789', 'ctx': {'max_length': 16}, 'url': 'https://errors.pydantic.dev/2.10/v/string_too_long'}]
+2025-03-12 09:48:31,196 - INFO - Watching folder: data
+2025-03-12 09:49:02,367 - INFO - Watching folder: data
+2025-03-12 10:13:24,316 - INFO - Watching folder: data
+2025-03-12 10:13:51,328 - INFO - Validated: 86967e13_test_flat.json
+2025-03-12 10:13:51,330 - INFO - Simulating sending validated\86967e13_test_flat.json to a 3rd party.
+2025-03-12 10:14:14,051 - WARNING - Invalid JSON structure (02bacad9_test_flat_CustomerID.json): [{'type': 'string_too_short', 'loc': ('CustomerID',), 'msg': 'String should have at least 7 characters', 'input': 'CU', 'ctx': {'min_length': 7}, 'url': 'https://errors.pydantic.dev/2.10/v/string_too_short'}]
+2025-03-12 10:14:14,055 - INFO - Simulating sending error email about 02bacad9_test_flat_CustomerID.json to admin@example.com.
+2025-03-12 14:07:40,719 - INFO - Starting Customer JSON Processor
+2025-03-12 14:07:40,720 - INFO - Watching folder: data
+2025-03-12 14:07:52,480 - INFO - Validated: 3f86d934_test_flat.json
+2025-03-12 14:07:52,482 - INFO - Sending 3f86d934_test_flat.json to 3rd party
+2025-03-12 14:08:35,824 - INFO - Process terminated by user
+2025-03-12 14:08:35,826 - INFO - Application shutdown complete
+2025-03-12 14:08:40,808 - INFO - Starting Customer JSON Processor
+2025-03-12 14:08:40,810 - INFO - Watching folder: data
+2025-03-12 14:08:56,968 - INFO - Validated: 3c0f47a0_test_flat.json
+2025-03-12 14:08:56,969 - INFO - Sending 3c0f47a0_test_flat.json to 3rd party
+2025-03-12 14:10:24,583 - WARNING - Invalid file c4fc9f72_test_flat_CustomerID.json: Invalid JSON structure: [{'type': 'string_too_short', 'loc': ('CustomerID',), 'msg': 'String should have at least 7 characters', 'input': 'CU', 'ctx': {'min_length': 7}, 'url': 'https://errors.pydantic.dev/2.10/v/string_too_short'}]
+2025-03-12 14:10:24,584 - INFO - Sending error email about c4fc9f72_test_flat_CustomerID.json
+2025-03-12 14:16:12,292 - INFO - Received signal 2, shutting down gracefully...
+2025-03-12 14:16:13,067 - INFO - Observer stopped successfully
+2025-03-12 14:16:13,067 - INFO - Application shutdown complete
+2025-03-13 09:21:15,809 - INFO - Starting Customer JSON Processor
+2025-03-13 09:21:15,812 - INFO - Watching folder: data
+2025-03-13 09:21:33,961 - INFO - Validated: 9d9f07e6_test_flat.json
+2025-03-13 09:21:33,964 - INFO - Sending 9d9f07e6_test_flat.json to 3rd party
+2025-03-13 09:22:00,109 - WARNING - Invalid file b9a381fb_test_nested.json: Invalid JSON structure: [{'type': 'string_type', 'loc': ('OperatorID',), 'msg': 'Input should be a valid string', 'input': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}, 'url': 'https://errors.pydantic.dev/2.10/v/string_type'}, {'type': 'missing', 'loc': ('CustomerID',), 'msg': 'Field required', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'url': 'https://errors.pydantic.dev/2.10/v/missing'}, {'type': 'missing', 'loc': ('CustomerCardNumber',), 'msg': 'Field required', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'url': 'https://errors.pydantic.dev/2.10/v/missing'}]
+2025-03-13 09:22:00,110 - INFO - Sending error email about b9a381fb_test_nested.json
+2025-03-13 09:27:04,219 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 09:27:05,006 - INFO - Observer stopped successfully
+2025-03-13 09:27:05,007 - INFO - Application shutdown complete
+2025-03-13 09:27:09,346 - INFO - Starting Customer JSON Processor
+2025-03-13 09:27:09,348 - INFO - Watching folder: data
+2025-03-13 09:27:15,413 - INFO - Validated flat JSON: 01f768df_test_flat.json
+2025-03-13 09:27:15,413 - INFO - Sending 01f768df_test_flat.json to 3rd party
+2025-03-13 09:27:41,693 - WARNING - Invalid file 933afe6c_test_nested.json: Invalid JSON structure: [{'type': 'value_error', 'loc': (), 'msg': 'Value error, JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'ctx': {'error': ValueError('JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields')}, 'url': 'https://errors.pydantic.dev/2.10/v/value_error'}]
+2025-03-13 09:27:41,694 - INFO - Sending error email about 933afe6c_test_nested.json
+2025-03-13 09:28:29,080 - INFO - Validated nested JSON: ad4b3c48_test_nested copy.json
+2025-03-13 09:28:29,081 - INFO - Sending ad4b3c48_test_nested copy.json to 3rd party
+2025-03-13 09:29:13,382 - WARNING - Invalid file 341344b1_test_nested.json: Invalid JSON structure: [{'type': 'value_error', 'loc': (), 'msg': 'Value error, JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'ctx': {'error': ValueError('JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields')}, 'url': 'https://errors.pydantic.dev/2.10/v/value_error'}]
+2025-03-13 09:29:13,383 - INFO - Sending error email about 341344b1_test_nested.json
+2025-03-13 09:41:13,159 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 09:41:13,802 - INFO - Observer stopped successfully
+2025-03-13 09:41:13,804 - INFO - Application shutdown complete
+2025-03-13 09:44:14,678 - INFO - Starting Customer JSON Processor
+2025-03-13 09:44:14,680 - INFO - Watching folder: data
+2025-03-13 09:44:18,404 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 09:44:18,687 - INFO - Observer stopped successfully
+2025-03-13 09:44:18,689 - INFO - Application shutdown complete
+2025-03-13 09:44:47,743 - INFO - Starting Customer JSON Processor
+2025-03-13 09:44:47,745 - INFO - Watching folder: data
+2025-03-13 09:45:02,942 - INFO - Starting Customer JSON Processor
+2025-03-13 09:45:02,945 - INFO - Watching folder: data
+2025-03-13 09:46:20,599 - WARNING - Invalid file fa3b6246_test_nested.json: Invalid JSON structure: [{'type': 'value_error', 'loc': (), 'msg': 'Value error, JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields', 'input': {'OperatorID': {'CustomerID': 'CUST456', 'CustomerCardNumber': '1234567812345678'}}, 'ctx': {'error': ValueError('JSON must either have CustomerID and CustomerCardNumber fields directly, or a nested Customer object with these fields')}, 'url': 'https://errors.pydantic.dev/2.10/v/value_error'}]
+2025-03-13 10:12:47,722 - INFO - Validated flat JSON: 95bfc0bd_test_flat.json
+2025-03-13 10:12:47,723 - INFO - Sending 95bfc0bd_test_flat.json to 3rd party
+2025-03-13 10:16:34,449 - INFO - Validated nested JSON: 6f939073_test_nested.json
+2025-03-13 10:16:34,450 - INFO - Sending 6f939073_test_nested.json to 3rd party
+2025-03-13 10:17:39,924 - WARNING - Invalid file 37202158_test_nested fault.json: Invalid JSON structure: [{'type': 'too_short', 'loc': ('Customer', 'CustomerCardNumber'), 'msg': 'Value should have at least 16 items after validation, not 14', 'input': '12345678901234', 'ctx': {'field_type': 'Value', 'min_length': 16, 'actual_length': 14}, 'url': 'https://errors.pydantic.dev/2.10/v/too_short'}]
+2025-03-13 10:21:50,381 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:21:51,243 - INFO - Observer stopped successfully
+2025-03-13 10:21:51,244 - INFO - Application shutdown complete
+2025-03-13 10:21:56,504 - INFO - Starting Customer JSON Processor
+2025-03-13 10:21:56,507 - INFO - Watching folder: data
+2025-03-13 10:22:03,592 - WARNING - Invalid file 53d2e30e_test_nested fault.json: Invalid JSON structure: [{'type': 'too_short', 'loc': ('Customer', 'CustomerCardNumber'), 'msg': 'Value should have at least 16 items after validation, not 14', 'input': '12345678901234', 'ctx': {'field_type': 'Value', 'min_length': 16, 'actual_length': 14}, 'url': 'https://errors.pydantic.dev/2.10/v/too_short'}]
+2025-03-13 10:22:03,593 - INFO - Sending error email about 53d2e30e_test_nested fault.json
+2025-03-13 10:38:34,803 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:38:35,078 - INFO - Observer stopped successfully
+2025-03-13 10:38:35,079 - INFO - Application shutdown complete
+2025-03-13 10:38:37,379 - INFO - Starting Customer JSON Processor
+2025-03-13 10:38:37,381 - INFO - Watching folder: data
+2025-03-13 10:43:33,762 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:43:34,536 - INFO - Observer stopped successfully
+2025-03-13 10:43:34,538 - INFO - Application shutdown complete
+2025-03-13 10:43:39,832 - INFO - Starting Customer JSON Processor
+2025-03-13 10:43:39,834 - INFO - Watching folder: data
+2025-03-13 10:45:20,482 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:45:20,893 - INFO - Observer stopped successfully
+2025-03-13 10:45:20,895 - INFO - Application shutdown complete
+2025-03-13 10:45:22,677 - INFO - Starting Customer JSON Processor
+2025-03-13 10:45:22,679 - INFO - Watching folder: data
+2025-03-13 10:50:20,282 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:50:20,531 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:50:20,856 - INFO - Observer stopped successfully
+2025-03-13 10:50:20,857 - INFO - Application shutdown complete
+2025-03-13 10:50:26,274 - INFO - Starting Customer JSON Processor
+2025-03-13 10:50:26,276 - INFO - Watching folder: data
+2025-03-13 10:50:59,092 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:50:59,312 - INFO - Observer stopped successfully
+2025-03-13 10:50:59,315 - INFO - Application shutdown complete
+2025-03-13 10:51:01,045 - INFO - Starting Customer JSON Processor
+2025-03-13 10:51:01,047 - INFO - Watching folder: data
+2025-03-13 10:53:26,718 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:53:27,129 - INFO - Observer stopped successfully
+2025-03-13 10:53:27,132 - INFO - Application shutdown complete
+2025-03-13 10:53:29,193 - INFO - Starting Customer JSON Processor
+2025-03-13 10:53:29,195 - INFO - Watching folder: data
+2025-03-13 10:54:12,168 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:54:12,220 - INFO - Observer stopped successfully
+2025-03-13 10:54:12,220 - INFO - Application shutdown complete
+2025-03-13 10:54:13,622 - INFO - Starting Customer JSON Processor
+2025-03-13 10:54:13,624 - INFO - Watching folder: data
+2025-03-13 10:54:33,273 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:54:33,636 - INFO - Observer stopped successfully
+2025-03-13 10:54:33,637 - INFO - Application shutdown complete
+2025-03-13 10:54:35,204 - INFO - Starting Customer JSON Processor
+2025-03-13 10:54:35,206 - INFO - Watching folder: data
+2025-03-13 10:54:45,002 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 10:54:45,212 - INFO - Observer stopped successfully
+2025-03-13 10:54:45,215 - INFO - Application shutdown complete
+2025-03-13 10:54:48,432 - INFO - Starting Customer JSON Processor
+2025-03-13 10:54:48,435 - INFO - Watching folder: data
+2025-03-13 10:56:37,188 - INFO - Validated nested JSON: 30393eb1_test_nested copy.json
+2025-03-13 10:56:37,190 - INFO - Sending 30393eb1_test_nested copy.json to 3rd party
+2025-03-13 10:56:52,275 - INFO - Validated nested JSON: 89a5c2e5_test_nested.json
+2025-03-13 10:56:52,277 - INFO - Sending 89a5c2e5_test_nested.json to 3rd party
+2025-03-13 10:57:00,324 - WARNING - Invalid file d7b02456_test_nested fault.json: Invalid JSON structure: [{'type': 'too_short', 'loc': ('Customer', 'CustomerCardNumber'), 'msg': 'Value should have at least 16 items after validation, not 14', 'input': '12345678901234', 'ctx': {'field_type': 'Value', 'min_length': 16, 'actual_length': 14}, 'url': 'https://errors.pydantic.dev/2.10/v/too_short'}]
+2025-03-13 10:57:00,325 - INFO - Sending error email about d7b02456_test_nested fault.json
+2025-03-13 11:21:06,272 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 11:21:07,257 - INFO - Observer stopped successfully
+2025-03-13 11:21:07,258 - INFO - Application shutdown complete
