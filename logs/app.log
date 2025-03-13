@@ -121,3 +121,15 @@
 2025-03-13 11:21:06,272 - INFO - Received signal 2, shutting down gracefully...
 2025-03-13 11:21:07,257 - INFO - Observer stopped successfully
 2025-03-13 11:21:07,258 - INFO - Application shutdown complete
+2025-03-13 14:15:28,180 - INFO - Starting Customer JSON Processor
+2025-03-13 14:15:28,183 - INFO - Watching folder: data
+2025-03-13 14:15:36,392 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 14:15:37,189 - INFO - Observer stopped successfully
+2025-03-13 14:15:37,191 - INFO - Application shutdown complete
+2025-03-13 14:16:13,188 - INFO - Starting Customer JSON Processor
+2025-03-13 14:16:13,191 - INFO - Watching folder: data
+2025-03-13 14:18:08,001 - INFO - Validated flat JSON: 9ac833a4_test_flat.json
+2025-03-13 14:18:08,004 - INFO - Sending error email about 9ac833a4_test_flat.json
+2025-03-13 14:23:44,073 - INFO - Received signal 2, shutting down gracefully...
+2025-03-13 14:23:44,424 - INFO - Observer stopped successfully
+2025-03-13 14:23:44,425 - INFO - Application shutdown complete

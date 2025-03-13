@@ -1,6 +1,11 @@
-.env
+/.env
+temp.py
+__pycache__/
 .venv/
 Archive/
 logs/
 processing/
 tests/
+models/__pycache__/
+handlers/__pycache__/
+utils/__pycache__/

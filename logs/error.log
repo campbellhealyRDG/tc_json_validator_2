@@ -165,3 +165,42 @@ Traceback (most recent call last):
     raise SMTPAuthenticationError(code, resp)
 smtplib.SMTPAuthenticationError: (535, b'5.7.3 Authentication unsuccessful [LO4P123CA0405.GBRP123.PROD.OUTLOOK.COM 2025-03-13T10:57:12.241Z 08DD61A92D54C00A]')
 
+2025-03-13 14:18:08,002 - ERROR - [file_handler.py:145] - _process_json_file - Error processing 9ac833a4_test_flat.json: name 'os' is not defined
+Traceback (most recent call last):
+  File "c:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\handlers\file_handler.py", line 133, in _process_json_file
+    send_to_third_party(validated_file_path)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\handlers\third_party.py", line 21, in send_to_third_party
+    app_logger.info(f"Sending {os.path.basename(file_path)} to 3rd party")
+                               ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+
+2025-03-13 14:18:19,257 - ERROR - [email_handler.py:68] - send_error_email - Failed to send email: (535, b'5.7.3 Authentication unsuccessful [LO4P265CA0309.GBRP265.PROD.OUTLOOK.COM 2025-03-13T14:18:19.052Z 08DD61DC37785553]')
+Traceback (most recent call last):
+  File "c:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\handlers\file_handler.py", line 133, in _process_json_file
+    send_to_third_party(validated_file_path)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\handlers\third_party.py", line 21, in send_to_third_party
+    app_logger.info(f"Sending {os.path.basename(file_path)} to 3rd party")
+                               ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\vincent.healy\Documents\Projects\Tap Convertor\JSON Validator 2\handlers\email_handler.py", line 61, in send_error_email
+    server.login(sender_email, password)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python 313\Lib\smtplib.py", line 750, in login
+    raise last_exception
+  File "C:\Python 313\Lib\smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+                   ~~~~~~~~~^
+        authmethod, getattr(self, method_name),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        initial_response_ok=initial_response_ok)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python 313\Lib\smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.3 Authentication unsuccessful [LO4P265CA0309.GBRP265.PROD.OUTLOOK.COM 2025-03-13T14:18:19.052Z 08DD61DC37785553]')
+
