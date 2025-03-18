@@ -29,7 +29,8 @@ logging.debug("Script has started running...")
 logging.info("Script is running...")
 
 # Define folder paths
-data_folder = "data"
+# data_folder = "data"
+data_folder = r"C:\Users\vincent.healy\Documents\Projects\Tap Convertor\frontend_accept\data"
 validated_folder = "validated"
 returns_folder = "returns"
 logs_folder = "logs"
