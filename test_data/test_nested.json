@@ -1,7 +1,6 @@
 {
-  "OperatorID": "OP123",
-  "Customer": {
-    "CustomerID": "CUST0001234",
-    "CustomerCardNumber": "1234567890123456"
-    }
+  "OperatorID": {
+    "CustomerID": "CUST456",
+    "CustomerCardNumber": "1234567812345678"
+  }
 }
