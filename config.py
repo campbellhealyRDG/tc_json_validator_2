@@ -6,10 +6,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Application settings
-DEBUG = os.environ.get("DEBUG", "False").lower() in ["true", "1", "yes"]
+DEBUG = os.environ.get("DEBUG", "True").lower() in ["true", "1", "yes"]
 
 # Folder paths
-DATA_FOLDER = os.environ.get("DATA_FOLDER", "data")
+# DATA_FOLDER = os.environ.get("DATA_FOLDER", "data")
+DATA_FOLDER = r"C:\Users\vincent.healy\Documents\Projects\Tap Convertor\frontend_accept\data"
 VALIDATED_FOLDER = os.environ.get("VALIDATED_FOLDER", "validated")
 RETURNS_FOLDER = os.environ.get("RETURNS_FOLDER", "returns")
 LOGS_FOLDER = os.environ.get("LOGS_FOLDER", "logs")

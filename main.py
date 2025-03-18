@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# main.py
 """Main entry point for the JSON processor application."""
 import os
 import sys

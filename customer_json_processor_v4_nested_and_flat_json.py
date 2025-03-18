@@ -9,21 +9,28 @@ import sys
 import traceback
 from logging.handlers import RotatingFileHandler
 import smtplib
+import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, ValidationError, Field, SecretStr, root_validator
+from typing import Optional, Dict, Any, Union
 from watchdog.observers.polling import PollingObserver  # More compatible observer
 from watchdog.events import FileSystemEventHandler
+from dotenv import load_dotenv
 
-import logging
+# Load environment variables from .env file
+load_dotenv()
 
-logging.basicConfig(level=logging.DEBUG)
+
+# Turn Debugging Off (False) or On (True)
+DEBUG = False  # Set to True to enable debugging
+logging.basicConfig(level=logging.DEBUG if DEBUG else logging.INFO, force = True)
 logging.debug("Script has started running...")
-print("Script is running...")
-
+logging.info("Script is running...")
 
 # Define folder paths
-data_folder = "data"
+# data_folder = "data"
+data_folder = r"C:\Users\vincent.healy\Documents\Projects\Tap Convertor\frontend_accept\data"
 validated_folder = "validated"
 returns_folder = "returns"
 logs_folder = "logs"
@@ -50,11 +57,12 @@ simple_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'
 
 # Configure root logger
 root_logger = logging.getLogger()
-root_logger.setLevel(logging.DEBUG)  # Capture all levels for the root logger
+root_logger.setLevel(logging.DEBUG if DEBUG else logging.INFO)  # Capture level based on DEBUG env value for the root logger
 
 # 1. App Logger (INFO level)
 app_logger = logging.getLogger('app')
 app_logger.setLevel(logging.INFO)
+
 # Rotating file handler for app logs - 5MB max size, keep 5 backup files
 app_handler = RotatingFileHandler(
     app_log_path, maxBytes=5*1024*1024, backupCount=5
@@ -76,13 +84,13 @@ error_logger.addHandler(error_handler)
 
 # 3. Debug Logger (DEBUG level)
 debug_logger = logging.getLogger('debug')
-debug_logger.setLevel(logging.DEBUG)
+debug_logger.setLevel(logging.DEBUG if DEBUG else logging.INFO)
 # Rotating file handler for debug logs - 10MB max size, keep 3 backup files
 debug_handler = RotatingFileHandler(
     debug_log_path, maxBytes=10*1024*1024, backupCount=3
 )
 debug_handler.setFormatter(detailed_formatter)
-debug_handler.setLevel(logging.DEBUG)
+debug_handler.setLevel(logging.DEBUG if DEBUG else logging.INFO)
 debug_logger.addHandler(debug_handler)
 
 # Console handler for important messages (INFO and above)
@@ -91,10 +99,43 @@ console_handler.setFormatter(simple_formatter)
 console_handler.setLevel(logging.INFO)
 root_logger.addHandler(console_handler)
 
+# Models for nested JSON structure
+class CustomerData(BaseModel):
+    CustomerID: str = Field(..., min_length=7)
+    # Use SecretStr for sensitive data - adds a layer of protection for card numbers
+    CustomerCardNumber: SecretStr = Field(..., min_length=16, max_length=16)
+    # Optional nested fields
+    CustomerDetails: Optional[Dict[str, Any]] = None
+
 class JSONSchema(BaseModel):
     OperatorID: str = Field(..., min_length=5, pattern=r"^[a-zA-Z0-9]+$")
-    CustomerID: str = Field(..., min_length=7)
-    CustomerCardNumber: str = Field(..., min_length=16, max_length=16)
+    # Either direct CustomerID and CustomerCardNumber fields (flat structure)
+    # or a nested Customer object (nested structure)
+    CustomerID: Optional[str] = Field(None, min_length=7)
+    CustomerCardNumber: Optional[SecretStr] = Field(None, min_length=16, max_length=16)
+    # For nested structure
+    Customer: Optional[CustomerData] = None
+    # Allow additional nested data
+    Metadata: Optional[Dict[str, Any]] = None
+    
+    @root_validator(pre=True)
+    def check_structure(cls, values):
+        """Validator to ensure either flat or proper nested structure exists."""
+        # Check if we have a nested Customer object
+        has_nested = 'Customer' in values and values['Customer'] is not None
+        
+        # Check if we have direct customer fields
+        has_direct_id = 'CustomerID' in values and values['CustomerID'] is not None
+        has_direct_card = 'CustomerCardNumber' in values and values['CustomerCardNumber'] is not None
+        
+        # Either we need both direct fields, or a nested Customer object
+        if not ((has_direct_id and has_direct_card) or has_nested):
+            raise ValueError(
+                "JSON must either have CustomerID and CustomerCardNumber fields directly, "
+                "or a nested Customer object with these fields"
+            )
+        
+        return values
 
 class JSONFileHandler(FileSystemEventHandler):
     def __init__(self):
@@ -127,7 +168,7 @@ class JSONFileHandler(FileSystemEventHandler):
             success = self.wait_for_file_access(file_path, max_attempts=10)
             if not success:
                 error_logger.error(f"Cannot access file after multiple attempts: {file_path}")
-                self.processing_files.remove(file_path)
+                self.processing_files.discard(file_path)
                 return
             
             # Move to processing folder first to avoid conflicts
@@ -143,7 +184,7 @@ class JSONFileHandler(FileSystemEventHandler):
                     error_logger.error(f"Unable to remove original file {file_path}: {str(e)}")
             except (PermissionError, OSError) as e:
                 error_logger.error(f"Failed to copy file to processing folder: {str(e)}")
-                self.processing_files.remove(file_path)
+                self.processing_files.discard(file_path)
                 return
             
             # Process from the processing folder
@@ -159,10 +200,19 @@ class JSONFileHandler(FileSystemEventHandler):
                         self.send_error_email(new_file_name, error_msg)
                         return
                 
+                # Log the structure type for debugging
+                is_nested = 'Customer' in data and isinstance(data['Customer'], dict)
+                structure_type = "nested" if is_nested else "flat"
+                debug_logger.debug(f"Detected {structure_type} JSON structure in {new_file_name}")
+                
+                # Create sanitized data for logging (mask sensitive information)
+                sanitized_data = self.sanitize_data_for_logging(data)
+                debug_logger.debug(f"Processing data: {sanitized_data}")
+                
                 validation_result = self.validate_json(data)
                 if validation_result is True:
                     self.move_file(processing_path, validated_folder, new_file_name)
-                    app_logger.info(f"Validated: {new_file_name}")
+                    app_logger.info(f"Validated {structure_type} JSON: {new_file_name}")
                     self.send_to_third_party(os.path.join(validated_folder, new_file_name))
                 else:
                     error_msg = f"Invalid JSON structure: {validation_result}"
@@ -177,13 +227,44 @@ class JSONFileHandler(FileSystemEventHandler):
                 self.send_error_email(new_file_name, f"{error_msg}\n\nStack trace:\n{stack_trace}")
         finally:
             # Clean up processing folder and tracking set
-            self.processing_files.remove(file_path)
+            self.processing_files.discard(file_path)
             if os.path.exists(processing_path):
                 try:
                     os.remove(processing_path)
                     debug_logger.debug(f"Cleaned up processing file: {processing_path}")
                 except (PermissionError, OSError) as e:
                     error_logger.error(f"Failed to clean up processing file {processing_path}: {str(e)}")
+
+    def sanitize_data_for_logging(self, data):
+        """Create a copy of data with sensitive information masked for safe logging."""
+        if data is None:
+            return None
+        
+        # For primitive types, return as is
+        if not isinstance(data, (dict, list)):
+            return data
+        
+        # For lists, sanitize each element
+        if isinstance(data, list):
+            return [self.sanitize_data_for_logging(item) for item in data]
+            
+        # For dictionaries, sanitize each value
+        sanitized = {}
+        for key, value in data.items():
+            # Mask card numbers
+            if key == 'CustomerCardNumber' and isinstance(value, str) and len(value) >= 8:
+                sanitized[key] = '*' * (len(value) - 4) + value[-4:]
+            # Process nested dictionaries
+            elif isinstance(value, dict):
+                sanitized[key] = self.sanitize_data_for_logging(value)
+            # Process lists of items
+            elif isinstance(value, list):
+                sanitized[key] = [self.sanitize_data_for_logging(item) for item in value]
+            # Pass through other values
+            else:
+                sanitized[key] = value
+                
+        return sanitized
     
     def wait_for_file_access(self, file_path, max_attempts=5, delay=1):
         """Wait for a file to be accessible with multiple retries."""
@@ -230,8 +311,9 @@ class JSONFileHandler(FileSystemEventHandler):
 
     def validate_json(self, data):
         """Check if JSON follows the required structure using Pydantic."""
-        debug_logger.debug(f"Validating JSON data: {data}")
+        debug_logger.debug(f"Validating JSON data structure")
         try:
+            # Validate against our schema
             JSONSchema(**data)
             return True
         except ValidationError as e:
@@ -260,7 +342,7 @@ class JSONFileHandler(FileSystemEventHandler):
         return False
     
     def send_error_email(self, file_name, error_message):
-        """Simulate sending an email notification to the admin."""
+        """Send an email notification to the admin using secure connection."""
         app_logger.info(f"Sending error email about {file_name}")
         debug_logger.debug(f"Email error details: {error_message}")
         
@@ -268,27 +350,33 @@ class JSONFileHandler(FileSystemEventHandler):
         subject = f"File Validation Error: {file_name}"
         body = f"The file {file_name} failed validation.\n\nError: {error_message}\n\nTimestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}"
         
-        # Email setup (this is just a simulation, you'll need to configure actual SMTP server details here)
-        sender_email = "noreply@example.com"
-        receiver_email = "admin@example.com"
+        # Email setup from environment variables
+        sender_email = os.environ.get("EMAIL_SENDER", "noreply@example.com")
+        receiver_email = os.environ.get("EMAIL_RECEIVER", "admin@example.com")
         password = os.environ.get("EMAIL_PASSWORD", "")  # Get from environment variable
+        smtp_server = os.environ.get("SMTP_SERVER", "smtp.office365.com")
+        smtp_port = int(os.environ.get("SMTP_PORT", "587"))  # Use 587 for Office 365
         
         if not password:
             error_logger.error("Email password not set in environment variables")
             return
-
+            
         # Create the email
         msg = MIMEMultipart()
         msg['From'] = sender_email
         msg['To'] = receiver_email
         msg['Subject'] = subject
         msg.attach(MIMEText(body, 'plain'))
-
+        
         try:
-            # Simulate sending email
-            debug_logger.debug(f"Connecting to SMTP server")
-            with smtplib.SMTP('smtp.example.com', 587) as server:
-                server.starttls()
+            # Create secure context
+            context = ssl.create_default_context()
+            
+            # Connect to SMTP server and then upgrade with STARTTLS
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.ehlo()  # Can be omitted
+                server.starttls(context=context)  # Secure the connection
+                server.ehlo()  # Can be omitted
                 server.login(sender_email, password)
                 text = msg.as_string()
                 server.sendmail(sender_email, receiver_email, text)
@@ -328,6 +416,14 @@ def check_system_requirements():
             if not os.access(folder, os.R_OK | os.W_OK):
                 error_logger.critical(f"Insufficient permissions for folder '{folder}'. Need read/write access.")
                 return False
+        
+        # Check that required environment variables are set
+        required_env_vars = ["EMAIL_PASSWORD"]
+        missing_vars = [var for var in required_env_vars if not os.environ.get(var)]
+        if missing_vars:
+            error_logger.critical(f"Missing required environment variables: {', '.join(missing_vars)}")
+            error_logger.info("Please create a .env file with the required variables or set them in your environment")
+            return False
         
         return True
     except Exception as e:
